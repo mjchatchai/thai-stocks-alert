@@ -1,23 +1,12 @@
 """
-Main Scanner Script for US Stock 6-Button Strategy (3-Zone Edition)
-- Syncs /buy, /sell, /add, /remove commands from Telegram Bot
-- Reads config/watchlist.json
-- Fetches 1D OHLCV data for each US stock
-- Computes EMA 9/21, ChrisMoody MACD (12,26,9), and ll21LAMBO21 KDJ (9,3)
-- Runs the 6-Button Sequential Strategy Engine (แบบ ก. Strict Reset)
-- Separates output into 3 distinct sections:
-  1. 💼 โซนที่ 1: หุ้นในพอร์ต (สั่งซื้อแล้ว — รอจังหวะขายออกเมื่อครบ 6 เม็ดแดง)
-  2. 🟢 โซนที่ 2: Watchlist ขาขึ้น (KDJ เขียว — รอจังหวะเข้าซื้อเมื่อครบ 6 เม็ดเขียว)
-  3. 🔴 โซนที่ 3: Watchlist ขาลง (KDJ แดง — พักตัว/ขาลง)
-- Generates 3-pane TradingView-style charts (docs/charts/*.png)
-- Builds the Web Dashboard (docs/index.html)
-- Sends Telegram summary & chart alerts with interactive buttons
+Main Scanner Script for Thai Stock (SET) 6-Button Strategy (3-Zone Edition)
 """
 
 import json
 import os
 import sys
 from dataclasses import asdict
+from datetime import datetime, timezone, timedelta
 from typing import List, Dict, Any
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -50,7 +39,6 @@ def run_scan(config_path: str = "config/watchlist.json") -> List[Dict[str, Any]]
     with open(full_config_path, "r", encoding="utf-8") as f:
         cfg = json.load(f)
 
-    # 1. Sync any queued commands (/buy, /sell, /add, /remove) from Telegram
     cfg = sync_telegram_commands(cfg, full_config_path)
 
     portfolio: Dict[str, Dict[str, Any]] = {
@@ -71,13 +59,13 @@ def run_scan(config_path: str = "config/watchlist.json") -> List[Dict[str, Any]]
 
     scan_results: List[Dict[str, Any]] = []
 
-    print(f"=== เริ่มสแกนหุ้น US จำนวน {len(tickers)} ตัว (Timeframe 1D) ===")
+    print(f"=== เริ่มสแกนหุ้นไทย (SET) จำนวน {len(tickers)} ตัว (Timeframe 1D) ===")
     for ticker in tickers:
-        ticker = ticker.strip().upper()
+        ticker = ticker.strip().upper().replace(".BK", "")
         if not ticker:
             continue
         try:
-            yf_sym = ticker if ticker.endswith(".BK") else f"{ticker}.BK"
+            yf_sym = f"{ticker}.BK"
             df = yf.Ticker(yf_sym).history(period="2y", interval="1d", auto_adjust=False)
             if df is None or df.empty or len(df) < 35:
                 print(f"[ข้าม] {ticker}: ข้อมูลไม่เพียงพอ")
@@ -116,7 +104,6 @@ def run_scan(config_path: str = "config/watchlist.json") -> List[Dict[str, Any]]
         except Exception as exc:
             print(f"[Error] {ticker}: {exc}")
 
-    # Separate into 3 Zones
     portfolio_tickers = set(portfolio.keys())
     zone1_portfolio = sorted(
         [x for x in scan_results if x["ticker"] in portfolio_tickers],
@@ -188,17 +175,21 @@ def run_scan(config_path: str = "config/watchlist.json") -> List[Dict[str, Any]]
         st = item["latest"]
         print(f"  {item['ticker']:<5} {_compact_buttons(st)} ฿{st['close']:.2f}")
 
-    # Build Web Dashboard
     dashboard_path = os.path.join(PROJECT_ROOT, "docs", "index.html")
     build_dashboard_html(scan_results, portfolio, dashboard_path)
     print(f"\n[สำเร็จ] อัปเดตหน้าเว็บกระดานเม็ดกระดุม 3 โซนเรียบร้อยที่: {dashboard_path}")
 
-    # Send Telegram Notifications if configured
     if scan_results:
         scan_date = scan_results[0]["latest"]["date"]
         board_msg = format_daily_board_message(scan_results, portfolio, scan_date)
         sent = send_telegram_message(board_msg)
         if sent:
+            today_th = datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d")
+            cfg["last_daily_scan_date"] = today_th
+            save_copy = {k: v for k, v in cfg.items() if not k.startswith("_")}
+            with open(full_config_path, "w", encoding="utf-8") as f:
+                json.dump(save_copy, f, indent=2, ensure_ascii=False)
+
             for item in scan_results:
                 tk = item["ticker"]
                 st = item["latest"]
