@@ -10,6 +10,7 @@
   "kdj_signal": 3,
   "last_telegram_update_id": 0,
   "portfolio": {},
+  "trade_history": [],
   "tickers": [
     "DELTA",
     "KCE",
