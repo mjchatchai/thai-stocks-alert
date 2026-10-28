@@ -8,8 +8,13 @@
   "macd_signal": 9,
   "kdj_period": 9,
   "kdj_signal": 3,
-  "last_telegram_update_id": 608876210,
-  "portfolio": {},
+  "last_telegram_update_id": 608876211,
+  "portfolio": {
+    "TU": {
+      "buy_price": 13.1,
+      "buy_date": "2026-10-28"
+    }
+  },
   "trade_history": [],
   "tickers": [
     "DELTA",
