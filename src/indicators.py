@@ -56,7 +56,7 @@ def compute_all_indicators(
     Computes all 3 indicators and their exact TradingView signals on OHLCV DataFrame.
     Expects columns: ['Open', 'High', 'Low', 'Close', 'Volume'].
     """
-    out = df.copy()
+    out = df.dropna(subset=["Close", "High", "Low"]).copy()
     close = out["Close"].astype(float)
     high = out["High"].astype(float)
     low = out["Low"].astype(float)
