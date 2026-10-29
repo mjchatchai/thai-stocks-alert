@@ -17,6 +17,10 @@
     "TRUE": {
       "buy_price": 12.8,
       "buy_date": "2026-10-28"
+    },
+    "TISCO": {
+      "buy_price": 126,
+      "buy_date": "2026-10-29"
     }
   },
   "trade_history": [],
