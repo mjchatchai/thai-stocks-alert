@@ -26,7 +26,8 @@ def send_weekly_summary_6button(cfg, is_thai=True, bot_label="TH 6-Button (Bot 2
     if win_pcts or loss_pcts:
         lines.append(f"• ชนะเฉลี่ย: <code>+{avg_win:.2f}%</code> | SL เฉลี่ย: <code>{avg_loss:.2f}%</code>")
     
-    send_telegram_message("\n".join(lines))
+    res = send_telegram_message("\n".join(lines))
+    print(f"[Telegram] Weekly Forward Test Report sent: {res}")
 
 """
 Main Scanner Script for Thai Stock (SET) 6-Button Strategy (3-Zone Edition)
