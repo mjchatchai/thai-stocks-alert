@@ -1,6 +1,6 @@
+from datetime import datetime
 
 def send_weekly_summary_6button(cfg, is_thai=True, bot_label="TH 6-Button (Bot 2)"):
-    from datetime import datetime
     history = cfg.get("trade_history", [])
     portfolio = cfg.get("portfolio", {})
     total = len(history)
@@ -261,7 +261,6 @@ def run_scan(config_path: str = "config/watchlist.json") -> List[Dict[str, Any]]
                     send_telegram_photo(item["chart_path"], caption, reply_markup=reply_markup)
 
     # Weekly Summary Report (Friday for TH)
-    from datetime import datetime
     if datetime.now().weekday() == 4:
         send_weekly_summary_6button(cfg, is_thai=True, bot_label="TH 6-Button (Bot 2)")
 
