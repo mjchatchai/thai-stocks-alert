@@ -1,3 +1,33 @@
+
+def send_weekly_summary_6button(cfg, is_thai=True, bot_label="TH 6-Button (Bot 2)"):
+    from datetime import datetime
+    history = cfg.get("trade_history", [])
+    portfolio = cfg.get("portfolio", {})
+    total = len(history)
+    wins = sum(1 for h in history if float(h.get("pnl_pct", 0)) > 0)
+    win_rate = (wins / total * 100.0) if total > 0 else 0.0
+    total_pct = sum(float(h.get("pnl_pct", 0)) for h in history)
+    
+    win_pcts = [float(h.get("pnl_pct", 0)) for h in history if float(h.get("pnl_pct", 0)) > 0]
+    loss_pcts = [float(h.get("pnl_pct", 0)) for h in history if float(h.get("pnl_pct", 0)) < 0]
+    avg_win = (sum(win_pcts) / len(win_pcts)) if win_pcts else 0.0
+    avg_loss = (sum(loss_pcts) / len(loss_pcts)) if loss_pcts else 0.0
+    
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    lines = [
+        f"📊 <b>WEEKLY FORWARD TEST REPORT</b> • <code>{today_str}</code>",
+        f"<b>{bot_label}</b>",
+        "━━━━━━━━━━━━━━━━",
+        f"• หุ้นในพอร์ตปัจจุบัน: <code>{len(portfolio)} ตัว</code>",
+        f"• ไม้ปิดรอบสะสม: <code>{total} ไม้</code>",
+        f"• Win Rate: <code>{win_rate:.1f}%</code> (ชนะ {wins} / แพ้ {total - wins})",
+        f"• กำไรสะสมสุทธิ: <code>{total_pct:+.2f}%</code>",
+    ]
+    if win_pcts or loss_pcts:
+        lines.append(f"• ชนะเฉลี่ย: <code>+{avg_win:.2f}%</code> | SL เฉลี่ย: <code>{avg_loss:.2f}%</code>")
+    
+    send_telegram_message("\n".join(lines))
+
 """
 Main Scanner Script for Thai Stock (SET) 6-Button Strategy (3-Zone Edition)
 """
@@ -23,6 +53,7 @@ from src.strategy_engine import evaluate_strategy_timeline
 from src.chart_generator import generate_stock_chart
 from src.dashboard_builder import build_dashboard_html
 from src.telegram_notifier import (
+    _record_closed_trade,
     _compact_buttons,
     _score_portfolio_exit_urgency,
     _score_stock_progress,
@@ -228,6 +259,11 @@ def run_scan(config_path: str = "config/watchlist.json") -> List[Dict[str, Any]]
                         f"สถานะ: <b>{st['status_text']}</b>{ext_line}"
                     )
                     send_telegram_photo(item["chart_path"], caption, reply_markup=reply_markup)
+
+    # Weekly Summary Report (Friday for TH)
+    from datetime import datetime
+    if datetime.now().weekday() == 4:
+        send_weekly_summary_6button(cfg, is_thai=True, bot_label="TH 6-Button (Bot 2)")
 
     return scan_results
 
