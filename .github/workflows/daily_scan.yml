@@ -2,8 +2,8 @@ name: Thai Stocks (SET) 6-Button Daily Scanner
 
 on:
   schedule:
-    # รันอัตโนมัติเวลา 08:42 น. เวลาไทย (01:42 UTC จันทร์-เสาร์ ช่วงทราฟฟิกต่ำและหลบนาที :00)
-    - cron: "42 1 * * 1-6"
+    # รันอัตโนมัติ 17:30 น. เวลาไทย (10:30 UTC จันทร์-ศุกร์ หลังตลาดหุ้นไทยปิด 16:30 น.)
+    - cron: "30 10 * * 1-5"
   workflow_dispatch:
 
 permissions:
