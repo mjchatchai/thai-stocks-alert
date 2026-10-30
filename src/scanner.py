@@ -136,6 +136,31 @@ def run_scan(config_path: str = "config/watchlist.json") -> List[Dict[str, Any]]
         except Exception as exc:
             print(f"[Error] {ticker}: {exc}")
 
+    # Auto-Paper Trade Entry & Exit for Bot 2
+    buy_now_list = [x for x in scan_results if x["latest"]["action_today"] == "BUY_NOW"]
+    sell_now_list = [x for x in scan_results if x["latest"]["action_today"] == "SELL_NOW"]
+    scan_date_val = scan_results[0]["latest"]["date"] if scan_results else ""
+    for item in buy_now_list:
+        tk = item["ticker"]
+        if tk not in portfolio:
+            st = item["latest"]
+            portfolio[tk] = {
+                "buy_price": st["close"],
+                "buy_date": scan_date_val,
+                "auto_paper_trade": True
+            }
+            print(f"Auto-Paper Trade Entry (Bot 2): {tk} @ ฿{st['close']:.2f}")
+
+    for item in sell_now_list:
+        tk = item["ticker"]
+        if tk in portfolio:
+            pos = portfolio.pop(tk)
+            st = item["latest"]
+            _record_closed_trade(cfg, tk, pos, st["close"], scan_date_val)
+            print(f"Auto-Paper Trade Exit (Bot 2): {tk} @ ฿{st['close']:.2f}")
+
+    cfg["portfolio"] = portfolio
+
     portfolio_tickers = set(portfolio.keys())
     zone1_portfolio = sorted(
         [x for x in scan_results if x["ticker"] in portfolio_tickers],
@@ -150,8 +175,6 @@ def run_scan(config_path: str = "config/watchlist.json") -> List[Dict[str, Any]]
         key=_score_stock_progress,
     )
 
-    buy_now_list = [x for x in scan_results if x["latest"]["action_today"] == "BUY_NOW"]
-    sell_now_list = [x for x in scan_results if x["latest"]["action_today"] == "SELL_NOW"]
     setup_buy_list = [
         x for x in scan_results if x["latest"]["action_today"] in ("WAIT_CONFIRM_BUY", "MACD_DOT_BUY", "COUNTING_BUY")
     ]
