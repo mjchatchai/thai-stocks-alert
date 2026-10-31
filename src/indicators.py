@@ -117,7 +117,7 @@ def compute_all_indicators(
     highest_h = high.rolling(window=kdj_period, min_periods=1).max()
     lowest_l = low.rolling(window=kdj_period, min_periods=1).min()
     hl_range = highest_h - lowest_l
-    rsv = np.where(hl_range == 0, 0.0, 100.0 * ((close - lowest_l) / hl_range))
+    rsv = np.where(hl_range == 0, 50.0, 100.0 * ((close - lowest_l) / np.maximum(hl_range, 1e-9)))
     out["rsv"] = pd.Series(rsv, index=out.index)
 
     out["kdj_k"] = pine_bcwsma(out["rsv"], kdj_signal, 1)
@@ -128,4 +128,77 @@ def compute_all_indicators(
     out["kdj_green"] = out["kdj_j"] > out["kdj_d"]
     out["kdj_red"] = ~out["kdj_green"]
 
+    # Volatility & Swing Low Metrics for Risk Management
+    prev_close = close.shift(1)
+    tr = pd.concat([
+        high - low,
+        (high - prev_close).abs(),
+        (low - prev_close).abs()
+    ], axis=1).max(axis=1)
+    out["atr14"] = tr.ewm(span=14, adjust=False).mean()
+    out["swing_low_10"] = low.rolling(window=10, min_periods=1).min()
+
     return out
+
+
+# -------------------------------------------------------------------------
+# SET 8-Tier Legal Tick Size & Volatility Modules
+# -------------------------------------------------------------------------
+SET_TICK_SCHEDULE = [
+    (0.00, 2.00, 0.01),
+    (2.00, 5.00, 0.02),
+    (5.00, 10.00, 0.05),
+    (10.00, 25.00, 0.10),
+    (25.00, 100.00, 0.25),
+    (100.00, 200.00, 0.50),
+    (200.00, 400.00, 1.00),
+    (400.00, float("inf"), 2.00),
+]
+
+
+def get_set_tick_size(price: float) -> float:
+    """Returns the legal tick size based on the SET 8-tier schedule."""
+    for low, high, tick in SET_TICK_SCHEDULE:
+        if low <= price < high:
+            return tick
+    return 2.00
+
+
+def step_tick_down(price: float) -> float:
+    """Steps down exactly 1 tick below price, handling tier boundary transitions."""
+    if price <= 0:
+        return 0.0
+    for low, high, tick in SET_TICK_SCHEDULE:
+        if abs(price - low) < 1e-6 and low > 0:
+            for pl, ph, pt in SET_TICK_SCHEDULE:
+                if ph == low:
+                    return round(price - pt, 2)
+        if low < price <= high:
+            return round(price - tick, 2)
+    return round(price - 2.00, 2)
+
+
+def round_to_set_tick(price: float, round_mode: str = "down") -> float:
+    """Rounds a price to the nearest legal SET tick."""
+    if price <= 0:
+        return 0.0
+    tick = get_set_tick_size(price)
+    if round_mode == "down":
+        return round(np.floor(price / tick) * tick, 2)
+    elif round_mode == "up":
+        return round(np.ceil(price / tick) * tick, 2)
+    return round(np.round(price / tick) * tick, 2)
+
+
+def compute_atr(df: pd.DataFrame, period: int = 14) -> pd.Series:
+    """Calculates Average True Range."""
+    high = df["High"]
+    low = df["Low"]
+    close = df["Close"]
+    prev_close = close.shift(1)
+    tr = pd.concat([
+        high - low,
+        (high - prev_close).abs(),
+        (low - prev_close).abs()
+    ], axis=1).max(axis=1)
+    return tr.ewm(span=period, adjust=False).mean()
