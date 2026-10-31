@@ -29,14 +29,14 @@ def main():
 
     now_th = datetime.now(THAI_TZ)
     today_th = now_th.strftime("%Y-%m-%d")
-    is_trading_morning = (now_th.weekday() < 6) and ((now_th.hour, now_th.minute) >= (8, 40))
+    is_trading_evening = (now_th.weekday() < 5) and ((now_th.hour, now_th.minute) >= (17, 0))
     already_scanned_today = (cfg.get("last_daily_scan_date") == today_th)
 
     if cfg.get("_trigger_scan_now"):
         print("[Command] พบคำสั่ง /scan -> เริ่มสแกนหุ้นทั้งหมดและส่งรายงานทันที...")
         run_scan()
-    elif is_trading_morning and not already_scanned_today:
-        print(f"[Daily Auto-Scan] ถึงเวลาส่งรายงานประจำวัน ({today_th} {now_th.strftime('%H:%M')} น.) -> เริ่มสแกนทันที...")
+    elif is_trading_evening and not already_scanned_today:
+        print(f"[Daily Auto-Scan] ถึงเวลาส่งรายงานประจำวันหุ้นไทย ({today_th} {now_th.strftime('%H:%M')} น.) -> เริ่มสแกนทันที...")
         run_scan()
     else:
         print("[Command] เช็คคำสั่ง Telegram เรียบร้อยแล้ว")
