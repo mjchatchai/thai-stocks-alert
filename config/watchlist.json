@@ -12,15 +12,27 @@
   "portfolio": {
     "TU": {
       "buy_price": 13.1,
-      "buy_date": "2026-10-28"
+      "buy_date": "2026-10-28",
+      "current_price": 12.7,
+      "unrealized_pnl": 0.0,
+      "current_r": 0.0,
+      "total_pnl": 0.0
     },
     "TRUE": {
       "buy_price": 12.8,
-      "buy_date": "2026-10-28"
+      "buy_date": "2026-10-28",
+      "current_price": 12.8,
+      "unrealized_pnl": 0.0,
+      "current_r": 0.0,
+      "total_pnl": 0.0
     },
     "TISCO": {
       "buy_price": 126,
-      "buy_date": "2026-10-29"
+      "buy_date": "2026-10-29",
+      "current_price": 124.5,
+      "unrealized_pnl": 0.0,
+      "current_r": 0.0,
+      "total_pnl": 0.0
     }
   },
   "trade_history": [],
