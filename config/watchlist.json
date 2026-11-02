@@ -13,7 +13,7 @@
     "TU": {
       "buy_price": 13.1,
       "buy_date": "2026-10-28",
-      "current_price": 12.9,
+      "current_price": 12.8,
       "unrealized_pnl": 0.0,
       "current_r": 0.0,
       "total_pnl": 0.0
@@ -29,7 +29,7 @@
     "TISCO": {
       "buy_price": 126,
       "buy_date": "2026-10-29",
-      "current_price": 124.5,
+      "current_price": 124.0,
       "unrealized_pnl": 0.0,
       "current_r": 0.0,
       "total_pnl": 0.0
@@ -51,7 +51,11 @@
       "buy_date": "2026-11-02",
       "entry_date": "2026-11-02",
       "buy_price": 9.75,
-      "auto_paper_trade": true
+      "auto_paper_trade": true,
+      "current_price": 9.55,
+      "unrealized_pnl": -1240.0,
+      "current_r": -0.25,
+      "total_pnl": -1240.0
     }
   },
   "trade_history": [],
