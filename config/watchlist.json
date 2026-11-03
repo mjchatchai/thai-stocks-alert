@@ -13,10 +13,17 @@
     "TU": {
       "buy_price": 13.1,
       "buy_date": "2026-10-28",
-      "current_price": 12.8,
+      "current_price": 13.1,
       "unrealized_pnl": 0.0,
       "current_r": 0.0,
-      "total_pnl": 0.0
+      "total_pnl": 0.0,
+      "entry_price": 13.1,
+      "current_sl": 12.44,
+      "risk_per_share": 0.66,
+      "current_shares": 100,
+      "initial_shares": 100,
+      "target_3r": 15.08,
+      "target_5r": 16.4
     },
     "TRUE": {
       "buy_price": 12.8,
@@ -24,15 +31,29 @@
       "current_price": 12.8,
       "unrealized_pnl": 0.0,
       "current_r": 0.0,
-      "total_pnl": 0.0
+      "total_pnl": 0.0,
+      "entry_price": 12.8,
+      "current_sl": 12.16,
+      "risk_per_share": 0.64,
+      "current_shares": 100,
+      "initial_shares": 100,
+      "target_3r": 14.72,
+      "target_5r": 16.0
     },
     "TISCO": {
       "buy_price": 126,
       "buy_date": "2026-10-29",
       "current_price": 124.0,
-      "unrealized_pnl": 0.0,
-      "current_r": 0.0,
-      "total_pnl": 0.0
+      "unrealized_pnl": -200.0,
+      "current_r": -0.32,
+      "total_pnl": -200.0,
+      "entry_price": 126.0,
+      "current_sl": 119.7,
+      "risk_per_share": 6.3,
+      "current_shares": 100,
+      "initial_shares": 100,
+      "target_3r": 144.9,
+      "target_5r": 157.5
     },
     "TFG": {
       "ticker": "TFG",
@@ -52,10 +73,10 @@
       "entry_date": "2026-11-02",
       "buy_price": 9.75,
       "auto_paper_trade": true,
-      "current_price": 9.55,
-      "unrealized_pnl": -1240.0,
-      "current_r": -0.25,
-      "total_pnl": -1240.0
+      "current_price": 9.4,
+      "unrealized_pnl": -2170.0,
+      "current_r": -0.44,
+      "total_pnl": -2170.0
     }
   },
   "trade_history": [],
@@ -95,7 +116,7 @@
     "MALEE",
     "KAMART"
   ],
-  "last_daily_scan_date": "2026-11-02",
+  "last_daily_scan_date": "2026-11-03",
   "active_positions": {},
   "last_scan_date": "2026-11-03"
 }
