@@ -95,5 +95,7 @@
     "MALEE",
     "KAMART"
   ],
-  "last_daily_scan_date": "2026-11-02"
+  "last_daily_scan_date": "2026-11-02",
+  "active_positions": {},
+  "last_scan_date": "2026-11-03"
 }
