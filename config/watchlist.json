@@ -58,10 +58,10 @@
       "entry_date": "2026-11-02",
       "buy_price": 9.75,
       "auto_paper_trade": true,
-      "current_price": 9.75,
-      "unrealized_pnl": 0.0,
-      "current_r": 0.0,
-      "total_pnl": 0.0
+      "current_price": 9.7,
+      "unrealized_pnl": -310.0,
+      "current_r": -0.06,
+      "total_pnl": -310.0
     },
     "AOT": {
       "ticker": "AOT",
@@ -81,10 +81,10 @@
       "entry_date": "2026-11-05",
       "buy_price": 61.25,
       "auto_paper_trade": true,
-      "current_price": 61.25,
-      "unrealized_pnl": 0.0,
-      "current_r": 0.0,
-      "total_pnl": 0.0
+      "current_price": 61.75,
+      "unrealized_pnl": 750.0,
+      "current_r": 0.15,
+      "total_pnl": 750.0
     },
     "BA": {
       "ticker": "BA",
@@ -103,7 +103,11 @@
       "buy_date": "2026-11-11",
       "entry_date": "2026-11-11",
       "buy_price": 19.9,
-      "auto_paper_trade": true
+      "auto_paper_trade": true,
+      "current_price": 19.8,
+      "unrealized_pnl": -310.0,
+      "current_r": -0.06,
+      "total_pnl": -310.0
     }
   },
   "trade_history": [
@@ -162,7 +166,7 @@
     "MALEE",
     "KAMART"
   ],
-  "last_daily_scan_date": "2026-11-11",
+  "last_daily_scan_date": "2026-11-12",
   "active_positions": {},
   "last_scan_date": "2026-11-03"
 }
