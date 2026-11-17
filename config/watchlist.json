@@ -13,10 +13,10 @@
     "TU": {
       "buy_price": 13.1,
       "buy_date": "2026-10-28",
-      "current_price": 13.2,
-      "unrealized_pnl": 10.0,
-      "current_r": 0.15,
-      "total_pnl": 10.0,
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN,
       "entry_price": 13.1,
       "current_sl": 12.44,
       "risk_per_share": 0.66,
@@ -28,10 +28,10 @@
     "TRUE": {
       "buy_price": 12.8,
       "buy_date": "2026-10-28",
-      "current_price": 13.05,
-      "unrealized_pnl": 25.0,
-      "current_r": 0.39,
-      "total_pnl": 25.0,
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN,
       "entry_price": 12.8,
       "current_sl": 12.16,
       "risk_per_share": 0.64,
@@ -58,10 +58,10 @@
       "entry_date": "2026-11-02",
       "buy_price": 9.75,
       "auto_paper_trade": true,
-      "current_price": 9.6,
-      "unrealized_pnl": -930.0,
-      "current_r": -0.19,
-      "total_pnl": -930.0
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN
     },
     "AOT": {
       "ticker": "AOT",
@@ -81,10 +81,10 @@
       "entry_date": "2026-11-05",
       "buy_price": 61.25,
       "auto_paper_trade": true,
-      "current_price": 62.0,
-      "unrealized_pnl": 1125.0,
-      "current_r": 0.23,
-      "total_pnl": 1125.0
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN
     },
     "BA": {
       "ticker": "BA",
@@ -104,10 +104,10 @@
       "entry_date": "2026-11-11",
       "buy_price": 19.9,
       "auto_paper_trade": true,
-      "current_price": 19.75,
-      "unrealized_pnl": -465.0,
-      "current_r": -0.09,
-      "total_pnl": -465.0
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN
     },
     "TISCO": {
       "ticker": "TISCO",
@@ -126,7 +126,11 @@
       "buy_date": "2026-11-16",
       "entry_date": "2026-11-16",
       "buy_price": 128.5,
-      "auto_paper_trade": true
+      "auto_paper_trade": true,
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN
     }
   },
   "trade_history": [
@@ -185,7 +189,7 @@
     "MALEE",
     "KAMART"
   ],
-  "last_daily_scan_date": "2026-11-16",
+  "last_daily_scan_date": "2026-11-18",
   "active_positions": {},
   "last_scan_date": "2026-11-03"
 }
