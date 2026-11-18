@@ -131,6 +131,44 @@
       "unrealized_pnl": NaN,
       "current_r": NaN,
       "total_pnl": NaN
+    },
+    "PR9": {
+      "ticker": "PR9",
+      "entry_price": 19.45,
+      "current_sl": 18.0,
+      "stop_loss": 18.0,
+      "risk_per_share": 1.45,
+      "shares": 3400,
+      "current_shares": 3400,
+      "initial_shares": 3400,
+      "target_3r": 23.8,
+      "target_5r": 26.75,
+      "position_capital": 66130.0,
+      "tp1_hit": false,
+      "tp2_hit": false,
+      "buy_date": "2026-11-17",
+      "entry_date": "2026-11-17",
+      "buy_price": 19.45,
+      "auto_paper_trade": true
+    },
+    "TIDLOR": {
+      "ticker": "TIDLOR",
+      "entry_price": 16.95,
+      "current_sl": 16.0,
+      "stop_loss": 16.0,
+      "risk_per_share": 0.95,
+      "shares": 5200,
+      "current_shares": 5200,
+      "initial_shares": 5200,
+      "target_3r": 19.8,
+      "target_5r": 21.7,
+      "position_capital": 88140.0,
+      "tp1_hit": false,
+      "tp2_hit": false,
+      "buy_date": "2026-11-17",
+      "entry_date": "2026-11-17",
+      "buy_price": 16.95,
+      "auto_paper_trade": true
     }
   },
   "trade_history": [
@@ -189,7 +227,7 @@
     "MALEE",
     "KAMART"
   ],
-  "last_daily_scan_date": "2026-11-18",
+  "last_daily_scan_date": "2026-11-19",
   "active_positions": {},
   "last_scan_date": "2026-11-03"
 }
