@@ -13,10 +13,10 @@
     "TU": {
       "buy_price": 13.1,
       "buy_date": "2026-10-28",
-      "current_price": 12.9,
-      "unrealized_pnl": -20.0,
-      "current_r": -0.3,
-      "total_pnl": -20.0,
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN,
       "entry_price": 13.1,
       "current_sl": 12.44,
       "risk_per_share": 0.66,
@@ -24,29 +24,6 @@
       "initial_shares": 100,
       "target_3r": 15.08,
       "target_5r": 16.4
-    },
-    "AOT": {
-      "ticker": "AOT",
-      "entry_price": 61.25,
-      "current_sl": 58.0,
-      "stop_loss": 58.0,
-      "risk_per_share": 3.25,
-      "shares": 1500,
-      "current_shares": 1500,
-      "initial_shares": 1500,
-      "target_3r": 71.0,
-      "target_5r": 77.5,
-      "position_capital": 91875.0,
-      "tp1_hit": false,
-      "tp2_hit": false,
-      "buy_date": "2026-11-05",
-      "entry_date": "2026-11-05",
-      "buy_price": 61.25,
-      "auto_paper_trade": true,
-      "current_price": 60.0,
-      "unrealized_pnl": -1875.0,
-      "current_r": -0.38,
-      "total_pnl": -1875.0
     },
     "BA": {
       "ticker": "BA",
@@ -66,10 +43,10 @@
       "entry_date": "2026-11-11",
       "buy_price": 19.9,
       "auto_paper_trade": true,
-      "current_price": 18.9,
-      "unrealized_pnl": -3100.0,
-      "current_r": -0.62,
-      "total_pnl": -3100.0
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN
     },
     "TISCO": {
       "ticker": "TISCO",
@@ -89,10 +66,10 @@
       "entry_date": "2026-11-16",
       "buy_price": 128.5,
       "auto_paper_trade": true,
-      "current_price": 126.5,
-      "unrealized_pnl": -1600.0,
-      "current_r": -0.33,
-      "total_pnl": -1600.0
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN
     },
     "PR9": {
       "ticker": "PR9",
@@ -112,10 +89,10 @@
       "entry_date": "2026-11-17",
       "buy_price": 19.45,
       "auto_paper_trade": true,
-      "current_price": 18.85,
-      "unrealized_pnl": -2040.0,
-      "current_r": -0.41,
-      "total_pnl": -2040.0
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN
     },
     "TIDLOR": {
       "ticker": "TIDLOR",
@@ -135,10 +112,10 @@
       "entry_date": "2026-11-17",
       "buy_price": 16.95,
       "auto_paper_trade": true,
-      "current_price": 17.15,
-      "unrealized_pnl": 1040.0,
-      "current_r": 0.21,
-      "total_pnl": 1040.0
+      "current_price": NaN,
+      "unrealized_pnl": NaN,
+      "current_r": NaN,
+      "total_pnl": NaN
     }
   },
   "trade_history": [
@@ -195,6 +172,24 @@
       "exit_date": "2026-11-23",
       "days_held": 26,
       "exit_reason": "6 Red Buttons SELL_NOW Exit"
+    },
+    {
+      "ticker": "AOT",
+      "entry_price": 61.25,
+      "exit_price": NaN,
+      "buy_price": 61.25,
+      "sell_price": NaN,
+      "shares": 1500,
+      "realized_pnl": NaN,
+      "r_multiple": NaN,
+      "pnl_r": NaN,
+      "pnl_pct": NaN,
+      "buy_date": "2026-11-05",
+      "sell_date": "2026-11-24",
+      "entry_date": "2026-11-05",
+      "exit_date": "2026-11-24",
+      "days_held": 19,
+      "exit_reason": "Stop Loss Hit (-1R)"
     }
   ],
   "tickers": [
@@ -233,7 +228,7 @@
     "MALEE",
     "KAMART"
   ],
-  "last_daily_scan_date": "2026-11-24",
+  "last_daily_scan_date": "2026-11-25",
   "active_positions": {},
   "last_scan_date": "2026-11-03"
 }
